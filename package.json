@@ -7,14 +7,10 @@
   "author": "iamgkstack <gauravkumar5295@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "serve": "nodemon --exec babel-node src/index.js",
-    "debug": "babel-node --inspect src/index.js",
-    "engine:dev": "apollo service:push --key='service:articles-prototype:3SR8n8eLM2d70NPg-aCpNg' --endpoint='https://api.dev.mojoreads.com/graphql'",
-    "test:run-server": "TEST_DATABASE=mytestdatabase npm start",
-    "test:execute-test": "mocha --require @babel/register 'src/**/*.spec.js'",
-    "test": "echo \"No test specified\" && exit 0",
-    "build": "babel src -d dist",
-    "start": "node dist/index.js"
+    "serve": "nodemon --exec babel-node src/server.js",
+    "test": "NODE_ENV=test mocha --require @babel/register src/**/*.test.js",
+    "build": "babel . -d dist --ignore \"node_modules/*\",\"src/test/*\" ",
+    "start": "node dist/src/server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -23,14 +19,8 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/register": "^7.9.0",
     "chai": "^4.2.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
     "mocha": "^7.1.2",
-    "nodemon": "^2.0.3",
-    "prettier": "^2.0.5"
+    "nodemon": "^2.0.3"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
