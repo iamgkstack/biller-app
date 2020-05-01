@@ -12,8 +12,6 @@ import responses from './responses';
 
 const app = express();
 
-console.log('config =>', config);
-
 app.enable('trust proxy');
 
 app.use(bodyParser.json());

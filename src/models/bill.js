@@ -63,6 +63,9 @@ const bill = (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ['AVAILABLE', 'NO_OUTSTANDING', 'PENDING']
     },
+    platformTransactionRefID: {
+      type: DataTypes.STRING
+    },
     currencyCode: {
       type: DataTypes.ENUM,
       values: ['INR', 'USD', 'EUR']

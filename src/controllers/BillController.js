@@ -39,7 +39,7 @@ module.exports = {
           success: true,
           data: {
             customer: {
-              name: customer.username,
+              name: customer[0].username,
             },
             billDetails: {
               billFetchStatus: 'NO_OUTSTANDING',
@@ -93,6 +93,69 @@ module.exports = {
   },
 
   fetchBillReceipt: async (req, res) => {
-    
+    const { billerBillID, platformBillID, paymentDetails } = req.body;
+
+    // validate the provided data
+    if(!billerBillID || !platformBillID || !paymentDetails) {
+      return res.badRequest({
+        message: 'billerBillID, platformBillID & paymentDetails is mendatory to fetch updated reciept.'
+      });
+    };
+
+    // check the types of provided data
+    if(
+      typeof billerBillID !== 'string' 
+      || typeof platformBillID !== 'string' 
+      || typeof paymentDetails !== 'object'
+    ) {
+      return res.badRequest({
+        message: 'typeof billerBillID, platformBillID & paymentDetails did not match.'
+      });
+    };
+
+
+    try {
+      // update the bill agins the billerBillID
+      const updatedBill = await models.Bill.update({
+        platformBillID,
+        paymentDetails,
+        updatedAt: sequelize.literal('NOW()')
+      }, {
+        returning: true,
+        raw: true,
+        where: { billerBillID }
+      });
+
+      // insert the data in receipt against the updated bill
+      const reciptObj = {
+        customer: updatedBill[1][0].customerID,
+        billerBillID: updatedBill[1][0].billerBillID,
+        uniquePaymentRefID: updatedBill[1][0].paymentDetails.uniquePaymentRefID,
+        platformTransactionRefID: updatedBill[1][0].paymentDetails.platformTransactionRefID,
+        amount: updatedBill[1][0].paymentDetails.amountPaid.value
+      };
+
+      let insertedReceipt = await models.Receipt.create(reciptObj);
+      insertedReceipt = insertedReceipt.toJSON();
+
+      const receipt = {
+        status: 200,
+        success: true,
+        data: {
+          billerBillID: insertedReceipt.billerBillID,
+          platformBillID: updatedBill[1][0].platformBillID,
+          platformTransactionRefID: insertedReceipt.platformTransactionRefID,
+          receipt: {
+            id: insertedReceipt.id,
+            date: insertedReceipt.createdAt
+          }
+        }
+      }
+
+      return res.ok(receipt);
+    } catch (e) {
+      return res.serverError(e.message);
+    }
+
   }
 }

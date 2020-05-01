@@ -1,7 +1,7 @@
 import getToken from './getToken';
 import createToken from './createToken';
 
-export default {
+module.exports = {
   getToken,
   createToken
 };
