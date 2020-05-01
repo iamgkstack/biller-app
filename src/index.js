@@ -9,6 +9,7 @@ import config from './config';
 import { sequelize, models } from './models';
 import routes from './routes';
 import responses from './responses';
+import * as sql from './sql';
 
 const app = express();
 
