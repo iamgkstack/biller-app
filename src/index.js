@@ -101,8 +101,9 @@ server.on('listening', () => {
 
 function start(done) {
   sequelize.sync({ force: isTest }).then(async () => {
-    if (isTest || isProduction) {
+    if (isProduction) {
       // Setup testing/prod environment
+      await sql.setup(sequelize);
     }
 
     /**
