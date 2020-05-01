@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "nodemon --exec babel-node src/server.js",
-    "test": "SET NODE_ENV=test&&mocha --require @babel/register src/**/*.test.js",
+    "test": "NODE_ENV=test mocha --require @babel/register src/**/*.test.js",
     "build": "babel . -d dist --ignore \"node_modules/*\",\"src/test/*\" ",
     "start": "node dist/src/server.js"
   },
