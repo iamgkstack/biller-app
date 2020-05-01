@@ -4,6 +4,7 @@ import { createToken } from '../../../../helpers';
 describe('fetch receipt API', () => {
   it('should return 200 if receipt fetched successfully', async () => {
     const token = await createToken();
+    console.log('token =>', token);
     const payload = {
       "billerBillID"   : "12123131322",
       "platformBillID" : "SETU121341312121",

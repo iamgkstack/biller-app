@@ -16,12 +16,12 @@ module.exports = {
   /* `AUD` is nothing but it's a `schemaId` whicj has been shared to setu */
   AUD: process.env.AUD || 'iwufh88whrb43hjbr.034fsadlkfj5.6wepq',
   postgresql: {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.BILLER_DB,
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 5432,
+    database: process.env.BILLER_DB || 'biller_db',
     dialect: 'postgres',
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
+    username: process.env.DB_USERNAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
     pool: {
       max: 5,
       min: 0,

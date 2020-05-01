@@ -10,7 +10,7 @@ const createToken = async () => {
   };
 
   const token = await jwt.sign(payload, config.JWT_SECRET, {
-    expiresIn: '2m'
+    expiresIn: '30m'
   });
 
   return token;
