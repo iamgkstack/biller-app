@@ -6,6 +6,9 @@
 module.exports = {
   port: 5200,
   prefix: '/api',
+  JWT_SECRET: process.env.JWT_SECRET || 'iwufh89whrb32hjbr.023fsadlkfj4.3wepo',
+  /* `AUD` is nothing but it's a `schemaId` whicj has been shared to setu */
+  AUD: process.env.AUD || 'iwufh88whrb43hjbr.034fsadlkfj5.6wepq',
   postgresql: {
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 5432,

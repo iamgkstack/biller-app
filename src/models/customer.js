@@ -1,17 +1,16 @@
+import uuid from 'uuid/v1';
+
 const customer = (sequelize, DataTypes) => {
   const Customer = sequelize.define('customer', {
     id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV1
+      defaultValue: () => uuid()
     },
-    firstName: {
-      allowNull: false, 
-      type: DataTypes.STRING
-    },
-    lastName: {
+    username: {
       allowNull: false,
+      unique: true,
       type: DataTypes.STRING
     },
     email: {
@@ -19,9 +18,13 @@ const customer = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false,
       validate: {
-        notEmpty: true,
         isEmail: true
       }
+    },
+    mobile: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,

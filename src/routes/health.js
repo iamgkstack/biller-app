@@ -1,4 +1,4 @@
-const HealthCheckController = require('../controllers/HealthCheckController');
+import HealthCheckController from '../controllers/HealthCheckController';
 
 module.exports = [
   {

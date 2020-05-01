@@ -1,6 +1,7 @@
 import express from 'express';
 
 import health from './health';
+import bill from './bill';
 
 
 const supportedMethods = ['get', 'post', 'put', 'delete'];
@@ -28,4 +29,5 @@ const configureRouter = (app, routes = []) => {
 
 module.exports = app => {
   configureRouter(app, health);
+  configureRouter(app, bill);
 };
