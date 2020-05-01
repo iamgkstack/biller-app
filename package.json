@@ -2,7 +2,10 @@
   "name": "biller-app",
   "version": "1.0.0",
   "description": "A simple biller app",
-  "main": "index.js",
+  "main": "src/server.js",
+  "engines": {
+    "node": "10.15.3"
+  },
   "repository": "https://github.com/iamgkstack/biller-app.git",
   "author": "iamgkstack <gauravkumar5295@gmail.com>",
   "license": "MIT",
