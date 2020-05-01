@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "engines": {
     "node": "10.15.3",
-    "npm": "6.4.1"
+    "npm": "6.4.1",
+    "yarn": "1.17.3"
   },
   "repository": "https://github.com/iamgkstack/biller-app.git",
   "author": "iamgkstack <gauravkumar5295@gmail.com>",
