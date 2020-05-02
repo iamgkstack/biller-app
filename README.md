@@ -27,18 +27,26 @@ yarn test
 * This starts the server on the port 5200
 * database seeds are located in `/src/sql/seeds`. These need to be run in the database
 
-## APIs available
+## APIs available for Local Host
+
+HEALTH check API
+
+```
+curl --location --request GET 'https://biller-node-js.herokuapp.com/api/v1/healthz'
+```
 
 Fetch bill corresponding to the user
 
 ```curl
-curl -X GET http://localhost:5200/api/v1/fetch/bill?mobile=972186724
+curl --location --request GET 'http://localhost:5200/api/v1/fetch/bill?mobile=9721867247' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpd3VmaDg4d2hyYjQzaGpici4wMzRmc2FkbGtmajUuNndlcHEiLCJqdGkiOiIzYTdlMzUyMC04YzBiLTExZWEtOTQxNi01OTg2ZjBkYWFjZmUiLCJpYXQiOjE1ODgzNzkwNDQsImV4cCI6MTU4ODM4MDg0NH0.VULrnpIRDIs4W3g8viAs13nIYya3ttjRqeOK3NuMBsw'
 ```
 
 Fetch bill receipt against the billerBillID
 
-```
+```curl
 curl --location --request PUT 'http://localhost:5200/api/v1/fetch/billReceipt' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpd3VmaDg4d2hyYjQzaGpici4wMzRmc2FkbGtmajUuNndlcHEiLCJqdGkiOiIzYTdlMzUyMC04YzBiLTExZWEtOTQxNi01OTg2ZjBkYWFjZmUiLCJpYXQiOjE1ODgzNzkwNDQsImV4cCI6MTU4ODM4MDg0NH0.VULrnpIRDIs4W3g8viAs13nIYya3ttjRqeOK3NuMBsw' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "billerBillID"   : "12123131322",
@@ -56,3 +64,41 @@ curl --location --request PUT 'http://localhost:5200/api/v1/fetch/billReceipt' \
 }'
 ```
 
+
+## APIs availbale Hosted on server
+
+HEALTH check API
+```
+curl --location --request GET 'https://biller-node-js.herokuapp.com/api/v1/healthz'
+```
+
+
+Fetch bill corresponding to the user
+
+```
+curl --location --request GET 'https://biller-node-js.herokuapp.com/api/v1/fetch/bill?mobile=9721867247' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpd3VmaDg4d2hyYjQzaGpici4wMzRmc2FkbGtmajUuNndlcHEiLCJqdGkiOiIzYTdlMzUyMC04YzBiLTExZWEtOTQxNi01OTg2ZjBkYWFjZmUiLCJpYXQiOjE1ODgzNzkwNDQsImV4cCI6MTU4ODM4MDg0NH0.VULrnpIRDIs4W3g8viAs13nIYya3ttjRqeOK3NuMBsw'
+```
+
+
+Fetch bill receipt against the billerBillID
+
+```
+curl --location --request PUT 'https://biller-node-js.herokuapp.com/api/v1/fetch/billReceipt' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpd3VmaDg4d2hyYjQzaGpici4wMzRmc2FkbGtmajUuNndlcHEiLCJqdGkiOiIzYTdlMzUyMC04YzBiLTExZWEtOTQxNi01OTg2ZjBkYWFjZmUiLCJpYXQiOjE1ODgzNzkwNDQsImV4cCI6MTU4ODM4MDg0NH0.VULrnpIRDIs4W3g8viAs13nIYya3ttjRqeOK3NuMBsw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "billerBillID"   : "12123131322",
+    "platformBillID" : "SETU121341312121",
+    "paymentDetails" : {
+        "platformTransactionRefID" : "TXN12121219",
+        "uniquePaymentRefID"       : "XXXXAYYDDD999999",
+        "amountPaid" : {
+            "value" : 99000
+        },
+        "billAmount" : {
+            "value" : 99000
+        }
+    }
+}'
+```
