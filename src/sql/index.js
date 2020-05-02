@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import fs from'fs';
-import path from'path';
-import glob from'glob';
-import series from'async/series';
+import fs from 'fs';
+import path from 'path';
+import glob from 'glob';
+import series from 'async/series';
 
 module.exports = {
   setup: sequelize => {
